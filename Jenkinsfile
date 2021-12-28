@@ -1,6 +1,3 @@
-image:
-  name: iregistry.baidu-int.com/ist/inbound-agent:4.11-1-jdk11
-
 def label = "slave-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
