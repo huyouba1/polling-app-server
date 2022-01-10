@@ -1,4 +1,8 @@
 def label = "slave-${UUID.randomUUID().toString()}"
+def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+def dockerRegistryUrl = "iregistry.baidu-int.com"
+def imageEndpoint = "ist/polling-app-server"
+def image = "${dockerRegistryUrl}/${imageEndpoint}"
 
 podTemplate(label: label, serviceAccount: 'jenkins',containers: [
   containerTemplate(name: 'slave', image: 'iregistry.baidu-int.com/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
@@ -20,13 +24,29 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
       echo "测试阶段"
     }
     stage('代码编译打包') {
-      container('maven') {
-        echo "代码编译打包阶段"
+      try {
+        container('maven') {
+          echo "2. 代码编译打包阶段"
+          sh "mvn clean package -Dmaven.test.skip=true"
+        }
+      } catch (exc) {
+        println "构建失败 - ${currentBuild.fullDisplayName}"
+        throw(exc)
       }
     }
     stage('构建 Docker 镜像') {
-      container('docker') {
-        echo "构建 Docker 镜像阶段"
+      withCredentials([[$class: 'UsernamePasswordMultiBinding',
+        credentialsId: 'dockerAuth',
+        usernameVariable: 'dockerHubUser',
+        passwordVariable: 'dockerHubPassword']]) {
+          container('docker') {
+            echo "3. 构建 Docker 镜像阶段"
+            sh """
+              docker login ${dockerRegistryUrl} -u ${dockerHubUser} -p ${dockerHubPassword}
+              docker build -t ${image}:${imageTag} .
+              docker push ${image}:${imageTag}
+              """
+          }
       }
     }
     stage('运行 Kubectl') {
