@@ -1,6 +1,6 @@
 def label = "slave-${UUID.randomUUID().toString()}"
 
-podTemplate(label: label, containers: [
+podTemplate(label: label, serviceAccount: 'jenkins',containers: [
   containerTemplate(name: 'slave', image: 'iregistry.baidu-int.com/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'maven', image: 'iregistry.baidu-int.com/ist/maven:3.6-alpine', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'iregistry.baidu-int.com/ist/docker', command: 'cat', ttyEnabled: true),
