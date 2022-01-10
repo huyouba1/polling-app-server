@@ -1,3 +1,5 @@
+node {
+
 def label = "slave-${UUID.randomUUID().toString()}"
 def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 def dockerRegistryUrl = "iregistry.baidu-int.com"
@@ -67,4 +69,5 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
       }
     }
   }
+}
 }
