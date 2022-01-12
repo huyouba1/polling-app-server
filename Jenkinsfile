@@ -29,7 +29,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
       try {
         container('maven') {
           echo "2. 代码编译打包阶段"
-          sh "mvn clean package -Dmaven.test.skip=true -s /home/jenkins/settings/settings.xml"
+          sh "mvn clean package -Dmaven.test.skip=true -s /home/settings.xml"
         }
       } catch (exc) {
         println "构建失败 - ${currentBuild.fullDisplayName}"
