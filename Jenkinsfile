@@ -4,7 +4,7 @@ def label = "slave-${UUID.randomUUID().toString()}"
 podTemplate(label: label, serviceAccount: 'jenkins',containers: [
   containerTemplate(name: 'slave', image: 'iregistry.baidu-int.com/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'maven', image: 'iregistry.baidu-int.com/ist/maven:3.6-alpine', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'docker', image: 'iregistry.baidu-int.com/ist/docker:17.03-dind', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'docker', image: 'iregistry.baidu-int.com/ist/docker', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'kubectl', image: 'iregistry.baidu-int.com/ist/kubectl', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'helm', image: 'iregistry.baidu-int.com/ist/helm:latest', command: 'cat', ttyEnabled: true)
 ], volumes: [
