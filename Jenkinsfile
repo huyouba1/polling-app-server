@@ -10,8 +10,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
 ], volumes: [
   hostPathVolume(mountPath: '/root/.m2', hostPath: '/var/run/m2'),
   hostPathVolume(mountPath: '/home/jenkins/.kube', hostPath: '/root/.kube'),
-  hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-  hostPathVolume(mountPath: ' /home/jenkins/settings/settings.xml', hostPath: '/data/zhen_xy/cicd/settings.xml')
+  hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
   node(label) {
     def myRepo = checkout scm
@@ -29,7 +28,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
       try {
         container('maven') {
           echo "2. 代码编译打包阶段"
-          sh "mvn clean package -Dmaven.test.skip=true -s  /home/jenkins/settings/settings.xml"
+          sh "mvn clean package -Dmaven.test.skip=true -s  settings.xml"
         }
       } catch (exc) {
         println "构建失败 - ${currentBuild.fullDisplayName}"
