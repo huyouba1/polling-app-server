@@ -43,7 +43,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
           container('docker') {
             echo "3. 构建 Docker 镜像阶段"
             sh """
-              docker login ${dockerRegistryUrl} -u ${dockerHubUser} -p ${dockerHubPassword}
+              docker login ${dockerRegistryUrl} -u ${dockerHubUser} -p Harbor12345
               docker build -t ${image}:${imageTag} .
               docker push ${image}:${imageTag}
               """
