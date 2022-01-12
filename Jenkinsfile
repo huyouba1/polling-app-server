@@ -11,7 +11,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
   hostPathVolume(mountPath: '/root/.m2', hostPath: '/var/run/m2'),
   hostPathVolume(mountPath: '/home/jenkins/.kube', hostPath: '/root/.kube'),
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-  configMapVolume(configMapName: 'settings.xml', mountPath: '/home/jenkins/settings/settings.xml', optional: false, subPath: 'settings.xml')])
+  configMapVolume(configMapName: 'settings.xml', mountPath: '/home/jenkins/settings/settings.xml', optional: false, subPath: 'settings.xml')
 ]) {
   node(label) {
     def myRepo = checkout scm
