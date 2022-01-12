@@ -85,6 +85,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+    <repositories>
+        <repository>
+            <id>public</id>
+            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>public-snapshots</id>
+            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public-snapshots/</url>
+        </repository>
+    </repositories>
 
 	<build>
 		<plugins>
