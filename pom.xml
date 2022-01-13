@@ -106,18 +106,18 @@
     <repositories>
         <repository>
             <id>public</id>
-            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public/</url>
+            <url>http://IP/content/groups/public/</url>
         </repository>
         <repository>
             <id>public-snapshots</id>
-            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public-snapshots/</url>
+            <url>http://IP/content/groups/public-snapshots/</url>
         </repository>
     </repositories>
     <pluginRepositories>  
       <pluginRepository>  
         <id>public</id>  
         <name>Maven China Mirror</name>  
-        <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public/</url>  
+        <url>http://IP/content/groups/public/</url>  
         <releases>  
           <enabled>true</enabled>  
         </releases>  

@@ -16,12 +16,12 @@
         <mirror>
             <id>public</id>
             <mirrorOf>public</mirrorOf>
-            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public/</url>
+            <url>http://IP/nexus/content/groups/public/</url>
         </mirror>
         <mirror>
             <id>public-snapshots</id>
             <mirrorOf>public-snapshots</mirrorOf>
-            <url>http://maven.nengli.baidu.com:8081/nexus/content/groups/public-snapshots/</url>
+            <url>http://IP/nexus/content/groups/public-snapshots/</url>
         </mirror>
     </mirrors>
 

@@ -75,7 +75,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: mysql
-        image: iregistry.baidu-int.com/ist/mysql:5.7
+        image: docker.io/ist/mysql:5.7
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3306

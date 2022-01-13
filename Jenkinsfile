@@ -2,11 +2,11 @@ def label = "slave-${UUID.randomUUID().toString()}"
 
 
 podTemplate(label: label, serviceAccount: 'jenkins',containers: [
-  containerTemplate(name: 'slave', image: 'iregistry.baidu-int.com/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'maven', image: 'iregistry.baidu-int.com/ist/maven:3.6-alpine', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'docker', image: 'iregistry.baidu-int.com/ist/docker', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'kubectl', image: 'iregistry.baidu-int.com/ist/kubectl', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'iregistry.baidu-int.com/ist/helm:latest', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'slave', image: 'docker.io/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'maven', image: 'docker.io/ist/maven:3.6-alpine', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'docker', image: 'docker.io/ist/docker', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'kubectl', image: 'docker.io/ist/kubectl', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'helm', image: 'docker.io/ist/helm:latest', command: 'cat', ttyEnabled: true)
 ], volumes: [
   hostPathVolume(mountPath: '/root/.m2', hostPath: '/var/run/m2'),
   hostPathVolume(mountPath: '/home/jenkins/.kube', hostPath: '/root/.kube'),
@@ -17,7 +17,7 @@ podTemplate(label: label, serviceAccount: 'jenkins',containers: [
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
     def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-    def dockerRegistryUrl = "iregistry.baidu-int.com"
+    def dockerRegistryUrl = "docker.io"
     def imageEndpoint = "ist/polling-app-server"
     def image = "${dockerRegistryUrl}/${imageEndpoint}"
 
