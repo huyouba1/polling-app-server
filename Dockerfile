@@ -1,4 +1,4 @@
-FROM docker.io/ist/openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine
 
 MAINTAINER cnych <icnych@gmail.com>
 
