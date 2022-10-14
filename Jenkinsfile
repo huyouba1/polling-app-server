@@ -2,11 +2,11 @@ def label = "slave-${UUID.randomUUID().toString()}"
 
 
 podTemplate(label: label, serviceAccount: 'jenkins',containers: [
-  containerTemplate(name: 'slave', image: 'docker.io/ist/inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'maven', image: 'docker.io/ist/maven:3.6-alpine', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'docker', image: 'docker.io/ist/docker', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'kubectl', image: 'docker.io/ist/kubectl', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'docker.io/ist/helm:latest', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'slave', image: 'inbound-agent:4.11-1-jdk11', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'maven', image: 'maven:3.6-alpine', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'kubectl', image: 'kubectl', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'helm', image: 'helm:latest', command: 'cat', ttyEnabled: true)
 ], volumes: [
   hostPathVolume(mountPath: '/root/.m2', hostPath: '/var/run/m2'),
   hostPathVolume(mountPath: '/home/jenkins/.kube', hostPath: '/root/.kube'),
